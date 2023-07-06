@@ -20,6 +20,7 @@ COPY ./mermaidcli/* ./
 RUN npm install && npm cache clean --force;
 
 ENV DEBIAN_FRONTEND=noninteractive
+ADD sources.list /etc/apt/
 RUN apt-get update 2>/dev/null && \
 	apt-get install -y --no-install-recommends \
 		ca-certificates \
@@ -76,6 +77,6 @@ RUN mkdir -p ./in
 RUN mkdir -p ./out
 RUN chmod 0777 ./in
 RUN chmod 0777 ./out
-
+EXPOSE 80
 CMD ["./app", "--mermaid=./node_modules/.bin/mmdc", "--in=./in", "--out=./out", "--puppeteer=./puppeteer-config.json", "--allow-all-origins=true"]
 
