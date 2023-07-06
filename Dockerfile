@@ -65,6 +65,9 @@ RUN apt-get update 2>/dev/null && \
         xdg-utils \
         wget \
         libxshmfence1 \
+	ttf-wqy-zenhei \
+ 	ttf-wqy-microhei \
+  	fonts-noto-cjk \
 		2>/dev/null && rm -rf /var/lib/apt/lists/*;
 
 COPY --from=go /root/bin/app ./app
