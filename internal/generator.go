@@ -145,11 +145,15 @@ func (c cachingGenerator) delete(diagram *Diagram) error {
 
 	inPath := fmt.Sprintf("%s/%s.mmd", c.inPath, id)
 	outPath := fmt.Sprintf("%s/%s.svg", c.outPath, id)
+	pngPath := fmt.Sprintf("%s/%s.png", c.outPath, id)
 
 	if err := os.Remove(inPath); err != nil {
 		return fmt.Errorf("could not delete diagram input: %w", err)
 	}
 	if err := os.Remove(outPath); err != nil {
+		return fmt.Errorf("could not delete diagram output: %w", err)
+	}
+	if err := os.Remove(pngPath); err != nil {
 		return fmt.Errorf("could not delete diagram output: %w", err)
 	}
 	if err := c.cache.Delete(diagram); err != nil {
